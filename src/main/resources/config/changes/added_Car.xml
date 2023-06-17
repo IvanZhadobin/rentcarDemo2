@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="ivan.zhadobin">
+        <createTable tableName="car">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="years_of_release" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mark" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="model_fk" type="integer">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+
+    </changeSet>
+</databaseChangeLog>

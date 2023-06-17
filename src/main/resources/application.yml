@@ -1,0 +1,3 @@
+spring.activemq.password=
+datasource:
+postgres-db:

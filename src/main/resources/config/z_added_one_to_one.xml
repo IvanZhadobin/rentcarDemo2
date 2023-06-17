@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20221205201500" author="sergei.reshetov">
+        <addForeignKeyConstraint constraintName="fk_owner" baseColumnNames="id"
+
+                                 baseTableName="owner"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="owner_fk"
+                                 referencedTableName="car"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_car_model" baseColumnNames="id"
+                                 baseTableName="car_model"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="car_model_fk"
+                                 referencedTableName="car"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_fuel_type"  baseColumnNames="id"
+                                 baseTableName="fuel_type"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="fuel_type_fk"
+                                 referencedTableName="car_model"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_engine"  baseColumnNames="id"
+                                 baseTableName="engine"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="engine_fk"
+                                 referencedTableName="car_model"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_schedule"  baseColumnNames="id"
+                                 baseTableName="schedule"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="schedule_fk"
+                                 referencedTableName="control_point_on_route"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_control_point"  baseColumnNames="id"
+                                 baseTableName="control_point"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="control_point_fk"
+                                 referencedTableName="control_point_on_route"
+        />
+        <addForeignKeyConstraint constraintName="fk_fact_route"  baseColumnNames="id"
+                                 baseTableName="fact_route"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="fact_route_fk"
+                                 referencedTableName="control_point_on_route"
+        />
+        <addForeignKeyConstraint constraintName="fk_plan_route"  baseColumnNames="id"
+                                 baseTableName="plan_route"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="plan_route_fk"
+                                 referencedTableName="fact_route"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_car_measurement"  baseColumnNames="id"
+                                 baseTableName="car"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="car_fk"
+                                 referencedTableName="measurement"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_car_owner" baseColumnNames="id"
+                                 baseTableName="car"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="car_fk"
+                                 referencedTableName="owner"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_car_plan_route"  baseColumnNames="id"
+                                 baseTableName="car"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="car_fk"
+                                 referencedTableName="plan_route"
+        />
+        <addForeignKeyConstraint constraintName="fk_control_point_on_route" baseColumnNames="id"
+                                 baseTableName="control_point_on_route"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="control_point_on_route_fk"
+                                 referencedTableName="schedule"
+        />
+
+    </changeSet>
+</databaseChangeLog>
+
+
+
