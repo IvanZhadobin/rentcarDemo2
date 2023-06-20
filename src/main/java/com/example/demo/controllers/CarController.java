@@ -1,21 +1,20 @@
-package com.example.demo.contollers;
+package com.example.demo.controllers;
 
 import com.example.demo.dto.CarDto;
 import com.example.demo.entities.Car;
 import com.example.demo.service.CarService;
-import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@AllArgsConstructor
+@RestController
 @RequestMapping("/car")
-@Api(value="Car controller", description = "crud operations")
+@AllArgsConstructor
 public class CarController {
     private final CarService service;
 
@@ -31,12 +30,12 @@ public class CarController {
 
     @PostMapping("/add")
     public ResponseEntity<CarDto> addCar(@RequestBody CarDto carDto){
-        return new ResponseEntity<>(new CarDto(service.addCar(carDto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(new CarDto(service.add(carDto)), HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity<CarDto> updateCar(@RequestBody CarDto carDto){
-        return new ResponseEntity<>(new CarDto(service.updateCar(carDto)), HttpStatus.OK);
+        return new ResponseEntity<>(new CarDto(service.update(carDto)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

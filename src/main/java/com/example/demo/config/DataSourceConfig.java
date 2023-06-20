@@ -1,4 +1,4 @@
-package ru.zagorovskiy.kinobase.config;
+package com.example.demo.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DataSourceConfig {
     @Bean
     @Primary
-    @ConfigurationProperties("app.datasource.main")
+    @ConfigurationProperties("spring.datasource.postgres-db")
     public HikariDataSource hikariDataSource() {
         return DataSourceBuilder
                 .create()

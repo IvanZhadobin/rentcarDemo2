@@ -1,19 +1,22 @@
-package com.example.demo.contollers;
+package com.example.demo.controllers;
 
 import com.example.demo.dto.RentDto;
 import com.example.demo.entities.Rent;
 import com.example.demo.service.RentService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@AllArgsConstructor
+@RestController
+@RequiredArgsConstructor
 @RequestMapping("/rent")
+@Validated
 public class RentController {
     private final RentService service;
 
@@ -22,20 +25,20 @@ public class RentController {
         return new ResponseEntity<>(new RentDto(service.getRentById(id)), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Rent>> getClients(){
+    @GetMapping("/views")
+    public ResponseEntity<List<Rent>> getRents(){
         return new ResponseEntity<>(service.getRents(), HttpStatus.OK);
     }
 
 
-    @PostMapping
-    public ResponseEntity<RentDto> addClient(@RequestBody RentDto rentDto){
-        return new ResponseEntity<>(new RentDto(service.addRent(rentDto)), HttpStatus.CREATED);
+    @PostMapping("/add")
+    public ResponseEntity<RentDto> addRent(@RequestBody RentDto rentDto){
+        return new ResponseEntity<>(new RentDto(service.add(rentDto)), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<RentDto> updateClient(@RequestBody RentDto rentDto){
-        return new ResponseEntity<>(new RentDto(service.updateRent(rentDto)), HttpStatus.OK);
+    @PutMapping("/update")
+    public ResponseEntity<RentDto> updateRent(@RequestBody RentDto rentDto){
+        return new ResponseEntity<>(new RentDto(service.update(rentDto)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

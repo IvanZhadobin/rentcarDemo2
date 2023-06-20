@@ -1,17 +1,17 @@
-package com.example.demo.contollers;
+package com.example.demo.controllers;
 
-import com.example.demo.dto.CarDto;
 import com.example.demo.dto.ClientDto;
 import com.example.demo.service.ClientService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@AllArgsConstructor
+@RestController
+@RequiredArgsConstructor
 @RequestMapping("/client")
+@Validated
 public class ClientController {
 
     private final ClientService service;
@@ -21,19 +21,14 @@ public class ClientController {
         return new ResponseEntity<>(new ClientDto(service.getById(id)), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<ClientDto> getByLogin(@PathVariable String login) {
-        return new ResponseEntity<>(new ClientDto(service.getByLogin(login)), HttpStatus.OK);
-    }
-
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<ClientDto> addClient(@RequestBody ClientDto clientDto){
-        return new ResponseEntity<>(new ClientDto(service.addClient(clientDto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ClientDto(service.add(clientDto)), HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto){
-        return new ResponseEntity<>(new ClientDto(service.updateClient(clientDto)), HttpStatus.OK);
+        return new ResponseEntity<>(new ClientDto(service.update(clientDto)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
